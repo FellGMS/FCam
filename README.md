@@ -14,6 +14,13 @@
 - **Alternância de Mídia**: Carregue e exiba imagens ou vídeos armazenados no dispositivo, substituindo o feed ao vivo da câmera.
 - **Interface Responsiva**: Design moderno e responsivo utilizando `styled-components`.
 
+```
+🔗 Link para Testar
+Você pode testar a aplicação diretamente no seguinte link:
+
+👉 Teste a aplicação FCam [Veja Funcionando] ( https://fcam.vercel.app/ )
+
+```
 ## 📂 Estrutura do Projeto
 
 ```

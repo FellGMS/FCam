@@ -1,70 +1,103 @@
-# Getting Started with Create React App
+# 📸 FCam
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**FCam** é uma aplicação web desenvolvida com **React** e **Node.js** que simula o funcionamento de uma câmera, permitindo alternar entre o feed ao vivo da câmera do dispositivo e a exibição de uma imagem ou vídeo armazenado localmente. Este projeto é ideal para desenvolvedores que desejam praticar técnicas modernas de desenvolvimento web com foco em UX responsiva e estilização com **styled-components**.
 
-## Available Scripts
+## 🚀 Tecnologias Utilizadas
 
-In the project directory, you can run:
+- **React** - Biblioteca JavaScript para criar interfaces de usuário.
+- **Node.js** - Ambiente de execução JavaScript server-side.
+- **Styled-Components** - Biblioteca para estilização de componentes em React.
 
-### `npm start`
+## 🎯 Funcionalidades
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Simulação de Câmera**: Acesse a câmera do dispositivo e exiba o feed ao vivo.
+- **Alternância de Mídia**: Carregue e exiba imagens ou vídeos armazenados no dispositivo, substituindo o feed ao vivo da câmera.
+- **Interface Responsiva**: Design moderno e responsivo utilizando `styled-components`.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📂 Estrutura do Projeto
 
-### `npm test`
+```
+projeto-camera-midia/
+│
+├── client/                         # Diretório principal do projeto React
+│   ├── public/                     # Arquivos públicos acessíveis
+│   │   ├── index.html              # Arquivo HTML principal
+│   │   └── ...                     # Outros arquivos públicos
+│   │
+│   ├── src/                        # Diretório onde fica o código fonte do projeto
+│   │   ├── components/             # Diretório para componentes React
+│   │   │   ├── CameraView.js       # Componente para visualização da câmera
+│   │   │   └── MediaSelector.js    # Componente para seleção de mídia (imagem/vídeo)
+│   │   │
+│   │   ├── styles/                 # Diretório para arquivos de estilo CSS
+│   │   │   └── styles.css          # Arquivo de estilos globais
+│   │   │
+│   │   ├── App.js                  # Componente principal do aplicativo
+│   │   ├── index.js                # Ponto de entrada da aplicação React
+│   │   └── ...                     # Outros arquivos padrão do React
+│   │
+│   ├── package.json                # Arquivo de configuração do npm
+│   ├── package-lock.json           # Arquivo de controle de versões de pacotes
+│   └── README.md                   # Documentação do projeto
+│
+└── .gitignore                      # Arquivo que especifica quais arquivos não serão versionados no Git
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠️ Configuração e Execução do Projeto
 
-### `npm run build`
+### Pré-requisitos
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Antes de começar, certifique-se de ter o **Node.js** e **npm** instalados em sua máquina.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Passo a Passo
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Clone o repositório:**
 
-### `npm run eject`
+   ```bash
+   git clone https://github.com/FellGMS/FCam.git
+   cd FCam/client
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. **Instale as dependências:**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```bash
+   npm install
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. **Inicie o servidor de desenvolvimento:**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   ```bash
+   npm start
+   ```
 
-## Learn More
+4. **Abra o navegador e acesse:**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   ```
+   http://localhost:3000
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   Agora você pode testar a simulação da câmera e alternar entre o feed ao vivo e a mídia armazenada!
 
-### Code Splitting
+## 🧩 Componentes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **CameraView.js**: Responsável por acessar a câmera do dispositivo e exibir o feed ao vivo.
+- **MediaSelector.js**: Permite que o usuário selecione uma imagem ou vídeo do dispositivo para exibição.
+- **App.js**: Componente principal que gerencia o estado e a interação entre a câmera e a mídia.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📝 Licença
 
-### Making a Progressive Web App
+Este projeto está licenciado sob a licença **MIT**. Consulte o arquivo `LICENSE` para obter mais informações.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## ✍️ Autor
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Feito com ❤️ por **Fellipe Goulart Gomes**.
 
-### Deployment
+- 🌐 GitHub: [FellGMS](https://github.com/FellGMS)
+- 💼 LinkedIn: [Fellipe Goulart Gomes](https://www.linkedin.com/in/fellipeggomes)
+- ✉️ E-mail: [fellipegoulartgomes@gmail.com](mailto:fellipegoulartgomes@gmail.com)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---

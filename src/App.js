@@ -1,10 +1,8 @@
-// src/App.js
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import CameraView from './components/CameraView';
 import MediaSelector from './components/MediaSelector';
 
-// Estilo do contêiner principal do aplicativo
 const AppContainer = styled.div`
   max-width: 600px;
   margin: 0 auto;
@@ -15,7 +13,6 @@ const AppContainer = styled.div`
   text-align: center;
 `;
 
-// Estilo para o botão
 const Button = styled.button`
   margin: 10px;
   padding: 10px 20px;
@@ -32,24 +29,31 @@ const Button = styled.button`
   }
 `;
 
-// Estilo para o contêiner da câmera e mídia
 const MediaContainer = styled.div`
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* Aspect ratio 16:9 */
+  padding-top: 56.25%;
   background-color: black;
   margin-top: 20px;
   border-radius: 8px;
   overflow: hidden;
 `;
 
+const ControlsContainer = styled.div`
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+`;
+
 function App() {
-  // Estado para alternar entre a câmera ao vivo e a mídia armazenada
   const [useCamera, setUseCamera] = useState(true);
   const [media, setMedia] = useState(null);
   const videoRef = useRef(null);
 
-  // Efeito para ativar a câmera ao iniciar
+  const [isRecording, setIsRecording] = useState(false);
+  const mediaRecorderRef = useRef(null);
+  const chunks = useRef([]);
+
   useEffect(() => {
     if (useCamera) {
       navigator.mediaDevices.getUserMedia({ video: true })
@@ -62,15 +66,45 @@ function App() {
     }
   }, [useCamera]);
 
-  // Função para gerenciar a seleção de mídia
   const handleMediaSelect = (selectedMedia) => {
     setMedia(selectedMedia);
     setUseCamera(false);
   };
 
-  // Função para alternar entre a câmera e a mídia selecionada
   const handleToggleCamera = () => {
     setUseCamera(!useCamera);
+  };
+
+  const handleTakePhoto = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = videoRef.current.videoWidth;
+    canvas.height = videoRef.current.videoHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+    const img = canvas.toDataURL('image/png');
+    setMedia({ file: img, type: 'image' });
+    setUseCamera(false);
+  };
+
+  const handleStartRecording = () => {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
+      mediaRecorderRef.current.stop();
+    } else {
+      const stream = videoRef.current.srcObject;
+      mediaRecorderRef.current = new MediaRecorder(stream);
+      mediaRecorderRef.current.ondataavailable = (event) => {
+        chunks.current.push(event.data);
+      };
+      mediaRecorderRef.current.onstop = () => {
+        const blob = new Blob(chunks.current, { type: 'video/mp4' });
+        const videoURL = URL.createObjectURL(blob);
+        setMedia({ file: videoURL, type: 'video' });
+        chunks.current = [];
+        setUseCamera(false);
+      };
+      mediaRecorderRef.current.start();
+      setIsRecording(true);
+    }
   };
 
   return (
@@ -83,11 +117,17 @@ function App() {
         <video ref={videoRef} autoPlay muted style={{ display: useCamera ? 'block' : 'none' }}></video>
         {media && !useCamera && (
           <div className="media-overlay">
-            {media.type === 'image' && <img src={URL.createObjectURL(media.file)} alt="Mídia" />}
-            {media.type === 'video' && <video controls autoPlay src={URL.createObjectURL(media.file)} />}
+            {media.type === 'image' && <img src={media.file} alt="Mídia" />}
+            {media.type === 'video' && <video controls autoPlay src={media.file} />}
           </div>
         )}
       </MediaContainer>
+      {useCamera && (
+        <ControlsContainer>
+          <Button onClick={handleTakePhoto}>📸 Tirar Foto</Button>
+          <Button onClick={handleStartRecording}>{isRecording ? '⏹️ Parar Gravação' : '🎥 Gravar Vídeo'}</Button>
+        </ControlsContainer>
+      )}
       {!useCamera && <MediaSelector onMediaSelect={handleMediaSelect} />}
     </AppContainer>
   );
